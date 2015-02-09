@@ -15,6 +15,10 @@ The net-ldap v0.2.2 Ruby gem is required for the ldap2zone recipe.
 
 ### Attributes which probably require tuning
 
+* `bind['databag-name']`
+  - String: The name of the data bag that stores ACLs and zone(s) entries.
+  - Default: "bind"
+
 * `bind['masters']`
   - Array of authoritative servers which you transfer zones from.
   - Default empty
@@ -81,15 +85,15 @@ The net-ldap v0.2.2 Ruby gem is required for the ldap2zone recipe.
     configuration.
   - Default to `/var/log/bind9/query.log`
 
-* `bind['statistics-channel']
+* `bind['statistics-channel']`
   - Boolean to enable a statistics-channel on a TCP port.
   - Default, platform-specific
 
-* `bind['statistics-port']
+* `bind['statistics-port']`
   - Integer for statistics-channel TCP port.
   - Default, 8080
 
-* `bind['server']
+* `bind['server']`
   - Hash of server IPs, each with their own array of options for the "server" clause.
   - Will not populate by default
 

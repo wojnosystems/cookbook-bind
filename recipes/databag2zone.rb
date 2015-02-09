@@ -22,12 +22,12 @@ if Chef::Config['solo'] && !node['bind']['allow_solo_search']
 else
 
   # Search for single zone string in bind data bag
-  search(:bind, 'zone:*') do |z|
+  search( node['bind']['databag-name'], 'zone:*') do |z|
     node.default['bind']['zones']['databag'] << z['zone']
   end
 
   # Search for zones arrays in bind data bag
-  search(:bind, 'zones:*') do |z_arr|
+  search( node['bind']['databag-name'], 'zones:*') do |z_arr|
     z_arr['zones'].each do |zone|
       node.default['bind']['zones']['databag'] << zone
     end

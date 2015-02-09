@@ -26,11 +26,11 @@ if Chef::Config['solo'] && !node['bind']['allow_solo_search']
   Chef::Log.warn('This recipe uses search. Chef Solo does not support search.')
 else
   begin
-    search(:bind, "role:#{node['bind']['acl-role']}") do |acl|
+    search( node['bind']['databag-name'], "role:#{node['bind']['acl-role']}") do |acl|
       node.default['bind']['acls'] << acl
     end
   rescue
-    Chef::Log.warn('bind databag not found, assuming ACL is empty.')
+    Chef::Log.warn("bind databag named '#{node['bind']['databag-name']}' not found, assuming ACL is empty.")
   end
 end
 

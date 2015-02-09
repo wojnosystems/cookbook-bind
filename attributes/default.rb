@@ -26,6 +26,7 @@ default['bind']['service_name'] = 'named'
 default['bind']['user'] = 'named'
 default['bind']['group'] = 'named'
 default['bind']['rndc-key'] = '/etc/rndc.key'
+default['bind']['databag-name'] = 'bind'
 
 # Allow usage with chef-solo-search, see https://github.com/edelight/chef-solo-search
 default['bind']['allow_solo_search'] = false
