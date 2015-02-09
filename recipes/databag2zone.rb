@@ -22,6 +22,7 @@ if Chef::Config['solo'] && !node['bind']['allow_solo_search']
 else
 
   # Search for single zone string in bind data bag
+  begin
   search( node['bind']['databag-name'], 'zone:*') do |z|
     node.default['bind']['zones']['databag'] << z['zone']
   end
@@ -32,4 +33,9 @@ else
       node.default['bind']['zones']['databag'] << zone
     end
   end
+  rescue Net::HTTPServerException
+    Chef::Log.error "The data bag object named: '#{node['bind']['databag-name']}' was not found"
+  end
+  Chef::Log.warn "No zones were configured in data bag named '#{node['bind']['databag-name']}' or via the attribute: node['bind']['zones']['databag']" if node.default['bind']['zones']['databag'].empty?
+
 end
